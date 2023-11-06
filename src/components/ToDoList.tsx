@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux"
+import { useAppSelector } from "../store"
 
 export function ToDoList() {
-  const toDos = useSelector(store => store.toDo)
+  const toDos = useAppSelector(store => store.toDo)
 
   console.log(toDos)
 
