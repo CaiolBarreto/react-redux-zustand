@@ -7,21 +7,21 @@ import { loadCourse, useCurrentLesson } from "../store/slices/player";
 import { useEffect } from "react";
 
 export function Player() {
-  const modules = useAppSelector(state => state.player.course?.modules)
+  const modules = useAppSelector((state) => state.player.course?.modules);
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const { currentLesson } = useCurrentLesson()
+  const { currentLesson } = useCurrentLesson();
 
   useEffect(() => {
-    dispatch(loadCourse())
-  }, [])
+    dispatch(loadCourse());
+  }, []);
 
   useEffect(() => {
     if (currentLesson) {
-      document.title = currentLesson.title
+      document.title = currentLesson.title;
     }
-  }, [currentLesson])
+  }, [currentLesson]);
 
   return (
     <div className="h-screen bg-zinc-950 text-zinc-50 flex justify-center items-center">
@@ -41,19 +41,29 @@ export function Player() {
           </div>
 
           <aside className="w-80 absolute top-0 bottom-0 right-0 border-l divide-y-2 divide-zinc-900 border-zinc-800 bg-zinc-900 overflow-y-scroll scrollbar-thin scrollbar-track-zinc-950 scrollbar-thumb-zinc-800">
-            {modules && modules.map((module, index) => {
-              return (
-                <Module
-                  key={module.id}
-                  moduleIndex={index}
-                  title={module.title}
-                  amountOfLessons={module.lessons.length}
-                />
-              )
-            })}
+            {modules ? (
+              modules.map((module, index) => {
+                return (
+                  <Module
+                    key={module.id}
+                    moduleIndex={index}
+                    title={module.title}
+                    amountOfLessons={module.lessons.length}
+                  />
+                );
+              })
+            ) : (
+              <div className="flex animate-pulse w-full items-center gap-3 bg-zinc-800 p-4">
+                <div className="h-10 w-10 rounded-full bg-zinc-700" />
+                <div className="flex-1 space-y-3">
+                  <div className="h-2 bg-zinc-700 rounded" />
+                  <div className="h-2 w-10 bg-zinc-700 rounded" />
+                </div>
+              </div>
+            )}
           </aside>
         </main>
       </div>
     </div>
-  )
+  );
 }
