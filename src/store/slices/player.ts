@@ -15,7 +15,7 @@ interface Course {
   }>
 }
 
-interface PlayerState {
+export interface PlayerState {
   course: Course | null
   currentModuleIndex: number
   currentLessonIndex: number
